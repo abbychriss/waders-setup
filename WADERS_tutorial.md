@@ -15,7 +15,7 @@ Most importantly, ROOT must be installed with a version of Python compatible wit
 
 The easiest way I have found to install WADERS is by using an `environment.yml` file to configure a conda environment with the correct versions of Python and ROOT. Using the environment.yml file provided in this repo, run the following to create the conda environment and activate it:
 ```
-conda env create -f environment.yml \
+conda env create -f environment.yml
 conda activate waders-env
 ```
 
@@ -46,13 +46,13 @@ cd ~/projects
 
 Clone into the pysimdamicm repository on the DAMIC-M Gitlab and checkout the main stable branch waders_LBC
 ```
-git clone https://gitlab.in2p3.fr/damicm/pysimdamicm.git \
+git clone https://gitlab.in2p3.fr/damicm/pysimdamicm.git
 git checkout waders_LBC
 ```
 
 Install dependencies for Python 3.10 through requirements.txt file, which includes packages such as numpy, matplotlib, scipy, etc:
 ```
-cd pysimdamicm \
+cd pysimdamicm
 pip install -r requirements_py310.txt
 ```
 
@@ -68,7 +68,7 @@ if not hasattr(np, "float128"):
 ```
 After you do this, you need to uninstall `psutil` and reinstall it to make sure there are no duplicate paths:
 ```
-pip uninstall -y psutil \
+pip uninstall -y psutil
 pip install psutil
 ```
 
