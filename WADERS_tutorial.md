@@ -1,5 +1,6 @@
-WADERS Installation Guide
-======
+# WADERS Installation Guide
+
+## Introduction
 
 In this guide, I will walk through my process for installing the WADERS software (written by Nuria Cstello-Mor for the DAMIC-M experiment).
 
@@ -8,23 +9,11 @@ If you do not have access already, email Nuria at castello@ifca.unican.es to req
 
 A detailed Wiki for the pysimdamicm (WADERS) software is available https://gitlab.in2p3.fr/damicm/pysimdamicm/-/wikis/home  
 
-Most importantly, root must be installed with a version of python compatible with WADERS. WADERS has been tested on root v6.26 with python 3.9 and v6.30 with python 3.10. In this installation guide, we install WADERS in a conda environment called waders-env with root 6.30 and python 3.10 and other packages. Navigate to a directory you would like to install WADERS into. I recommend installing into a projects directory in your base, such as ~/projects/ on Mac.
+Most importantly, ROOT must be installed with a version of Python compatible with WADERS. WADERS has been tested on ROOT v6.26 with Python 3.9 and v6.30 with Python 3.10. In this installation guide, we install WADERS in a conda environment called waders-env with ROOT 6.30 and Python 3.10 and other packages. Navigate to a directory you would like to install WADERS into. I recommend installing into a projects directory in your base, such as ~/projects/ on Mac.
 
-The easiest way I have found to install WADERS is by using an environment.yml file to configure a conda environment with the correct python and root versions. Create a file called environment.yml and fill it with the file contents by running:
-```
-cat > environment.yml << EOF
-name: waders-env
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - python=3.10.19
-  - root=6.30.4
-  - root_base=6.30.4
-EOF
-  ```
+## Create conda environment
 
-From the directory containing environment.yml, run the following to create the environment and activate it:
+The easiest way I have found to install WADERS is by using an `environment.yml` file to configure a conda environment with the correct versions of Python and ROOT. Using the environment.yml file provided in this repo, run the following to create the conda environment and activate it:
 ```
 conda env create -f environment.yml \
 conda activate waders-env
@@ -48,6 +37,8 @@ xcode-select --install
 ```
 and follow the system prompts to install the library.
 
+## Install WADERS
+
 Now we will install the pysimdamicm (WADERS) package. Navigate to your desired package installation directory (e.g. ~/projects). 
 ```
 cd ~/projects
@@ -59,7 +50,7 @@ git clone https://gitlab.in2p3.fr/damicm/pysimdamicm.git \
 git checkout waders_LBC
 ```
 
-Install dependencies for python 3.10 through requirements.txt file, which includes packages such as numpy, matplotlib, scipy, etc:
+Install dependencies for Python 3.10 through requirements.txt file, which includes packages such as numpy, matplotlib, scipy, etc:
 ```
 cd pysimdamicm \
 pip install -r requirements_py310.txt
@@ -81,6 +72,8 @@ pip uninstall -y psutil \
 pip install psutil
 ```
 
+## Test installation
+
 Now you should be good to go! Let's test the analysis software to make sure the main commands run as expected.
 
 There are two main branches of WADERS, `psimulCCDimg` for Geant4 simulation and `panaSKImg` for analysis. The rest of this tutorial will focus only on the analysis branch. Documentation for `psimulCCDimg` is available at https://ncastell.web.cern.ch/ncastell/pysimdamicm/howtouse.html  
@@ -90,10 +83,27 @@ We will do our first example using `panaSKImg`. Navigate to the directory you wa
 panaSKImg -j panaSKImg_config_LBC_ACM_4DQM_PA08_103.json -o . "avg_img_CV_250x3500x500_bin1x1_125_20260404_144853_0.fz" --save-plots
 ```
 
-Your Terminal should start printing out status updates for the processes, such as the parameters specified in the json file, which processes it is running, the values for single electron resolution found for each extension, and so on. When that finishes running, look in your directory for plot outputs and admire the beautiful fits!
+### Syntax
 
-If the command does not run, it is possible that there are some missing packages. Make sure you are in the waders-env conda environment. If you are in waders-env and there are still import errors, try installing them using conda and running again until it does not error.
+The general syntax for `panaSKImg` is
+```
+panaSKImg -j <path/to/json_file> -o <path/to/output_directory> "<path/to/image.fz/fits>"`
+``` 
 
+- The image name as well as flags `-j` and `-o` are required.
+- Accepted image format is a multi-extension fits file with ext 0 as header and ext 1-4 as data extensions 
+
+## Troubleshooting
+
+If the installation was successful, Terminal should start doing a bunch of printouts such as the parameters specified in the json file, which processes it is running, the values for single electron resolution found for each extension, and so on. When that finishes running, look in your directory for plot outputs and admire the beautiful zeroth and first electron peak fits!
+
+If the command does not run, it is possible that there are some missing packages. Make sure you have `waders-env` activated. You should see `(waders-env)` at the very beginning of your command line prompt if you are in the environment. 
+
+If `waders-env` is activated and there are still import errors, try installing them using conda and running again until it does not error.
+
+If the command fails with error
+```
+zsh: command not found: panaSKImg
 
 
 
