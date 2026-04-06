@@ -1,0 +1,8 @@
+name: waders-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.19
+  - root=6.30.4
+  - root_base=6.30.4
