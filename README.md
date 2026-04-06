@@ -1,4 +1,4 @@
-Clone repository 
+Clone this repository 
 ```
 git clone https://github.com/abbychriss/waders-setup
 ```
