@@ -60,7 +60,9 @@ Install pysimdamicm package in development mode:
 ```
 pip install -e .
 ```
-Now, if you are on a Mac made after 2020 (with an M1/.../M5 chip), I have run into architecture compatibility issues with certain hard coded numpy precision floats. Essentially, Mac chips do not allow floats with precision greater than 64 bits, so using np.float128 will error. The workaround is to change all instances of np.float128 to np. Add this line to `__init__.py` (in DAMICM_G4Sims/DAMICMSims/python_script/pysimdamicm/pysimdamicm):
+The -e flag makes the files editable.
+
+Now, if you are on a Mac made after 2020 (with an M1/.../M5 chip), I have run into architecture compatibility issues with certain hard coded numpy precision floats. Essentially, Mac chips do not allow floats with precision greater than 64 bits, so using np.float128 will error. The workaround is to change all instances of np.float128 to np. Add this line to `__init__.py` (in DAMICM_G4Sims/DAMICMSims/python_script/pysimdamicm/pysimdamicm) before the import statements:
 ```
 import numpy as np
 if not hasattr(np, "float128"):
@@ -83,7 +85,7 @@ We will do our first example using `panaSKImg`. Navigate to the directory you wa
 panaSKImg -j panaSKImg_config_LBC_ACM_4DQM_PA08_103.json -o . "avg_img_CV_250x3500x500_bin1x1_125_20260404_144853_0.fz" --save-plots
 ```
 
-If the installation was successful, Terminal should start doing a bunch of printouts such as the parameters specified in the json file, which processes it is running, the values for single electron resolution found for each extension, and so on. When that finishes running, look in your directory for plot outputs and admire the beautiful zeroth and first electron peak fits!
+If the installation was successful, your Terminal should start outputting a bunch of printouts such as the parameters specified in the json file, which processes it is running, the values for single electron resolution found for each extension, and so on. When that finishes running, look in your directory for plot outputs and admire the beautiful zeroth and first electron peak fits!
 
 ### Syntax
 
@@ -97,7 +99,7 @@ panaSKImg -j <path/to/json_file> -o <path/to/output_directory> "<path/to/image.f
 
 ## Troubleshooting
 
-If `panaSKImg` failed, it is possible that there are some missing packages. Make sure you have `waders-env` activated (you should see `(waders-env)` at the very beginning of your command line prompt if you are in the environment). 
+If `panaSKImg` fails and throws a "module not found" error, you may need to install the missing packages. Make sure you have `waders-env` activated (you should see `(waders-env)` at the very beginning of your command line prompt if you are in the environment). 
 
 If `waders-env` is activated and there are still import errors, try installing them using conda and running again until it does not error.
 
