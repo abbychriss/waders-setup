@@ -13,7 +13,7 @@ Most importantly, ROOT must be installed with a version of Python compatible wit
 
 ## Create conda environment
 
-The easiest way I have found to install WADERS is by using an `environment.yml` file to configure a conda environment with the correct versions of Python and ROOT. Using the environment.yml file provided in this repo, run the following to create the conda environment and activate it:
+The way I installed WADERS is in a conda environment where I can control the version of Python. I created a `environment.yml` file which configures a conda environment with Python=3.10 and ROOT=6.30. Run the following to create the conda environment and activate it:
 ```
 conda env create -f environment.yml
 conda activate waders-env
