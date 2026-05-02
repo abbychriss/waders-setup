@@ -19,7 +19,7 @@ conda env create -f environment.yml
 conda activate waders-env
 ```
 
-Before installing WADERS, make sure git is installed. Run the following in terminal
+Before installing WADERS, make sure git is installed (it probably is). Run the following in terminal
 ```
 git version
 ```
